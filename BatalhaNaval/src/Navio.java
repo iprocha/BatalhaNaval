@@ -1,4 +1,4 @@
-package br.poo2013.projeto;
+
 
 public interface Navio {
 	final static int PEQUENO = 2;
