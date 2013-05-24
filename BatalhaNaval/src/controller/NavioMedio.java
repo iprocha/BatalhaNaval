@@ -1,5 +1,6 @@
+package controller;
 
-class NavioPequeno implements Navio {
+public class NavioMedio implements Navio {
 
 	public int getPosicao() {
 		return 0;
