@@ -1,4 +1,4 @@
 
-public class CampoNavio implements CampoDeBatalha {
+public class CampoNavio extends CampoDeBatalha {
 
 }

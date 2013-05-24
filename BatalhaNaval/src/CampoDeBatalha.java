@@ -1,4 +1,4 @@
 
-public interface CampoDeBatalha {
-
+public class CampoDeBatalha {
+	 
 }

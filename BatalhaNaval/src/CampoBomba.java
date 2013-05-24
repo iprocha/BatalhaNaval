@@ -1,4 +1,4 @@
 
-public class CampoBomba implements CampoDeBatalha {
+public class CampoBomba extends CampoDeBatalha {
 
 }
