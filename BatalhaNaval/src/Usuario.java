@@ -5,7 +5,6 @@ public class Usuario implements Jogador {
 		
 	}
 
-	@Override
 	public void bombardear(int coordX, int coordY) {
 		
 	}
