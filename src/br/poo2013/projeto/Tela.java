@@ -82,7 +82,7 @@ public class Tela extends JFrame implements ActionListener {
 		mAtualizar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Tela.GetInstance().TrocaPainel(new TelaUpdate());
+				 Tela.GetInstance().TrocaPainel(new TelaUpdate());
 			}
 		});
 		mCadastro.add(mAtualizar);

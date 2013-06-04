@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
 	private Connection connection;
+	private boolean isConnected = false;
 
 	public void conectarDB() throws SQLException {
 		System.out.println("Conectando no PostgreSQL.....");
@@ -34,10 +35,14 @@ public class UsuarioDAO {
 		}
 		if (connection != null) {
 			System.out.println("Conectado com sucesso!");
-			// return connection;
+			isConnected = true;
 		} else {
 			throw new SQLException();
 		}
+	}
+
+	public boolean isConnected() {
+		return isConnected;
 	}
 
 	public int cadastrar(UsuarioModel user) throws SQLException {
@@ -85,6 +90,22 @@ public class UsuarioDAO {
 			throw new SQLException(notUser);
 		}
 		
+	}
+	
+	public void alteraSenha(String nova_senha) throws SQLException {
+		try{
+			String sql = "UPDATE tb_usuario "
+					+ "SET senha = ? "
+					+ "WHERE login = ?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, nova_senha);
+			statement.setString(2, Tela.getUser().getLogin());
+			System.out.println("Aqui: "+statement.toString());
+			statement.executeUpdate(); 
+		} catch(SQLException notUser){
+			notUser.printStackTrace();
+			throw new SQLException(notUser);
+		}
 	}
 
 }
