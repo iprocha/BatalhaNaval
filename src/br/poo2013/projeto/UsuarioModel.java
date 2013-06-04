@@ -1,6 +1,7 @@
 package br.poo2013.projeto;
 
 public class UsuarioModel {
+
 	private String login;
 	private String senha;
 	private long id;
@@ -9,6 +10,14 @@ public class UsuarioModel {
 	public UsuarioModel(String login, String senha){
 		this.login = login;
 		this.senha = senha;
+	}
+	
+	public UsuarioModel(String login, String senha, long id, int pontos) {
+		super();
+		this.login = login;
+		this.senha = senha;
+		this.id = id;
+		this.pontos = pontos;
 	}
 
 	public String getLogin() {

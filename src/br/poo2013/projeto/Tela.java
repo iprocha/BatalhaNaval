@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,37 +17,28 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-//import java.awt.BorderLayout;
-//import java.awt.CardLayout;
-//import java.awt.GridLayout;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import javax.swing.JButton;
-//import javax.swing.JFrame;
-//import javax.swing.JLabel;
-//import javax.swing.JPanel;
 
 public class Tela extends JFrame implements ActionListener {
-	// // criamos um JFrame chamado 'janela'
-	// JFrame janela = new JFrame();
-	// // criamos um JPanel chamado painel1
-	// JPanel painel1 = new JPanel();
-	// // criamos um JPanel chamado painel2
-	// JPanel painel2 = new JPanel();
-	// // criamos um JLabel chamado rotulo1
-	// JLabel rotulo1 = new JLabel("Painel 1", JLabel.CENTER);
-	// // criamos um JLabel chamado rotulo2
-	// JLabel rotulo2 = new JLabel("Painel 2", JLabel.CENTER);
-	// // criamos dois botoes e um painel para alternar entre os paineis
-	// JPanel painelSelecao = new JPanel();
-	// JButton botao1 = new JButton("Login");
-	// JButton botao2 = new JButton("Join");
-	// JButton botao3 = new JButton("Play");
-	// JButton botao4 = new JButton("Rank");
-	// // criamos o painelCard que será gerenciado pelo CardLayout
-	// JPanel painelCard = new JPanel();
 
 	private static Tela tela;
+	private static UsuarioDAO userDAO;
+	private static UsuarioModel user;
+
+	public static UsuarioModel getUser() {
+		return user;
+	}
+
+	public static void setUser(UsuarioModel user) {
+		Tela.user = user;
+	}
+
+	public static UsuarioDAO getUserDAO() {
+		return userDAO;
+	}
+
+	public static void setUserDAO() {
+		Tela.userDAO = new UsuarioDAO();
+	}
 
 	static public Tela GetInstance() {
 		if (tela == null)
@@ -62,38 +54,6 @@ public class Tela extends JFrame implements ActionListener {
 	}
 
 	private Tela() {
-		// // definimos o título da janela
-		// janela.setTitle("Exemplo de um CardLayout");
-		// // definimos a largura e a altura da janela
-		// janela.setSize(800, 600);
-		// // define a posição da janela na tela
-		// janela.setLocation(150, 150);
-		// // define que ao fechar a janela, encerre a aplicação
-		// janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// // definimos o layout da janela
-		// janela.setLayout(new BorderLayout());
-		// // definimos o painelselecao com o GridLayout e incluimos os botoes
-		// painelSelecao.setLayout(new GridLayout(1, 2));
-		// painelSelecao.add(botao1);
-		// painelSelecao.add(botao2);
-		// painelSelecao.add(botao3);
-		// painelSelecao.add(botao4);
-		// // adicionamos os rotulos a seus respectivos paineis
-		// painel1.add(rotulo1);
-		// painel2.add(rotulo2);
-		// // definimos o layout do painelCard
-		// painelCard.setLayout(new CardLayout());
-		// // adicionamos os paineis quem contém os rotulos ao painelCard
-		// painelCard.add(painel1, "p1");
-		// painelCard.add(painel2, "p2");
-		// // adicionamos os paineis à janela
-		// janela.add("North", painelSelecao);
-		// janela.add("Center", painelCard);
-		// // registra os botoes para tratarmos os eventos gerados por eles
-		// botao1.addActionListener(this);
-		// botao2.addActionListener(this);
-		// // mostramos a janela
-		// janela.setVisible(true);
 		// cria barra de menu
 		JMenuBar menuBar = new JMenuBar();
 
@@ -162,8 +122,16 @@ public class Tela extends JFrame implements ActionListener {
 	}
 	
 	public static void main(String args[]) {
-		//new UsuarioDAO().conectarDB();
-		Tela.GetInstance().TrocaPainel(new TelaInicial());
+		setUserDAO();
+		try {
+			userDAO.conectarDB();
+			Tela.GetInstance().TrocaPainel(new TelaInicial());
+		} catch (SQLException ex) {
+			JOptionPane.showMessageDialog(null, "Não foi possível conectar no BD",
+					"Erro", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+		}
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {

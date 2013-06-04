@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,7 +21,7 @@ import javax.swing.JTextField;
 public class TelaLogin extends JPanel {
 	JTextField texto = new JTextField(20);
 	JTextField texto_senha = new JTextField(10);
-	
+
 	String texto2 = "";
 	JLabel texto_label = new JLabel("Login: ");
 	JLabel texto_senha_label = new JLabel("Senha: ");
@@ -36,8 +37,23 @@ public class TelaLogin extends JPanel {
 		botao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				System.out.println("Login: "+texto.getText());
-				System.out.println("Senha: "+texto_senha.getText());
+				System.out.println("Login: " + texto.getText());
+				System.out.println("Senha: " + texto_senha.getText());
+				UsuarioDAO userDAO = Tela.getUserDAO();
+
+				try {
+					Tela.setUser(userDAO.efetuaLogin((String) texto.getText(),
+							(String) texto_senha.getText()));
+					JOptionPane.showMessageDialog(null,
+							"\"" + Tela.getUser().getLogin() + "\""
+									+ " logado(a) com sucesso!", "Sucesso",
+							JOptionPane.INFORMATION_MESSAGE);
+					Tela.GetInstance().TrocaPainel(new TelaInicial());
+				} catch (SQLException ex) {
+					JOptionPane.showMessageDialog(null,
+							"ERRO! Usuário não cadastrado!", "Erro",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
@@ -61,12 +77,11 @@ public class TelaLogin extends JPanel {
 		c.gridx = 4;
 		c.gridy = 0;
 		this.add(texto, c);
-		
+
 		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(texto_senha_label, c);
-
 
 		c.gridx = 4;
 		c.gridy = 1;
