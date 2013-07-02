@@ -1,13 +1,10 @@
 package br.poo2013.projeto;
 
-public interface Navio {
-	final static int PEQUENO = 2;
-	final static int MEDIO = 5;
-	final static int GRANDE = 6;
-	
-	public abstract int getPosicao();
+public abstract class Navio {
+	public abstract int getPosicaoX();
+	public abstract int getPosicaoY();
 	public abstract boolean navioAbatido();
 	public abstract void danoSofrido();
-	
-
+	public abstract int getTamanho();
+	public abstract boolean isHorizontal();
 }

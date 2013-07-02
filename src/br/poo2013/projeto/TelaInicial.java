@@ -6,11 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+
 
 public class TelaInicial extends JPanel {
 
@@ -19,10 +15,10 @@ public class TelaInicial extends JPanel {
 
 	public TelaInicial() {
 		try {
-//			image = javax.imageio.ImageIO.read(new java.net.URL(getClass()
-//					.getResource("br/poo2013/imagem/batalha_naval.jpg"), "batalha_naval.jpg"));
+			image = javax.imageio.ImageIO.read(new java.net.URL(getClass()
+					.getResource("batalha_naval.jpg"), "batalha_naval.jpg"));
 			//image = new ImageIcon("batalha_naval.jpg").getImage();
-			image = ImageIO.read(new File("batalha_naval.jpg"));
+			//image = ImageIO.read(new File("batalha_naval.jpg"));
 		} catch (Exception e) { /* handled in paintComponent() */
 		}
 	}

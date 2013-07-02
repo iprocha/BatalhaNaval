@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
-import javax.swing.JOptionPane;
-
 public class UsuarioDAO {
 	private Connection connection;
 	private boolean isConnected = false;
@@ -100,7 +98,6 @@ public class UsuarioDAO {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, nova_senha);
 			statement.setString(2, Tela.getUser().getLogin());
-			System.out.println("Aqui: "+statement.toString());
 			statement.executeUpdate(); 
 		} catch(SQLException notUser){
 			notUser.printStackTrace();

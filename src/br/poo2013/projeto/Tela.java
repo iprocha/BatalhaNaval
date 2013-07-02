@@ -1,14 +1,11 @@
 package br.poo2013.projeto;
 
 import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -23,6 +20,8 @@ public class Tela extends JFrame implements ActionListener {
 	private static Tela tela;
 	private static UsuarioDAO userDAO;
 	private static UsuarioModel user;
+	private static Controller controller; 
+	
 
 	public static UsuarioModel getUser() {
 		return user;
@@ -110,11 +109,11 @@ public class Tela extends JFrame implements ActionListener {
 
 		// Dimension tamanho_min = new Dimension(578, 384);
 		Dimension tamanho_min = new Dimension(898, 576);
-		Dimension tamanho_max = new Dimension(898, 576); // dimensoes da imagem
+		Dimension tamanho_max = new Dimension(1024, 768); // dimensoes da imagem
 															// de fundo
 		this.setTitle("Batalha Naval");
 		this.add(new JLabel("Jogo de Batalha Naval"));
-		this.setMinimumSize(tamanho_min); // ALTEREI AQUI
+		this.setMinimumSize(tamanho_min); 
 		this.setMaximumSize(tamanho_max);
 		this.pack();
 		this.setVisible(true);
@@ -124,6 +123,8 @@ public class Tela extends JFrame implements ActionListener {
 	public static void main(String args[]) {
 		setUserDAO();
 		try {
+			controller = new Controller();
+			controller.start();
 			userDAO.conectarDB();
 			Tela.GetInstance().TrocaPainel(new TelaInicial());
 		} catch (SQLException ex) {
