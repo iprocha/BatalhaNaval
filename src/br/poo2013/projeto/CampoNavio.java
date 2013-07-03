@@ -4,7 +4,7 @@ public class CampoNavio extends CampoDeBatalha {
 
 	public CampoNavio() {
 		super();
-		super.printCampo();
+		//super.printCampo();
 	}
 
 	public void colocaNavio(Navio navio) throws PosicaoInvalida {
@@ -36,6 +36,18 @@ public class CampoNavio extends CampoDeBatalha {
 			}
 			
 		}
+	}
+	//Verifica se na coordenada informada existe um navio
+	public boolean verificaNavio(Coordenada coordenada){
+		return super.campo[coordenada.getX()][coordenada.getY()].equals("*");
+	}
+	
+	public void bomba(Coordenada coordenadas){
+		if(super.campo[coordenadas.getX()][coordenadas.getY()].equals("~")){
+			super.campo[coordenadas.getX()][coordenadas.getY()] = "a";
+		}else{
+			super.campo[coordenadas.getX()][coordenadas.getY()] = "x";
+		}		
 	}
 
 }

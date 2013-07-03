@@ -7,4 +7,5 @@ public abstract class Navio {
 	public abstract void danoSofrido();
 	public abstract int getTamanho();
 	public abstract boolean isHorizontal();
+	public abstract boolean isDown();
 }

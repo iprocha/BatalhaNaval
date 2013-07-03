@@ -25,7 +25,15 @@ public abstract class Jogador {
 	}
 	
 	//Informa se o jogador ainda possui navios
-	public abstract boolean areThereShips();
+	public boolean areThereShips() {
+		return (this.navioGrande.get(0).isDown()
+				|| this.navioMedio.get(0).isDown()
+				|| this.navioMedio.get(1).isDown()
+				|| this.navioPequeno.get(0).isDown()
+				|| this.navioPequeno.get(1).isDown() 
+				|| this.navioPequeno
+				.get(2).isDown());
+	}
 	//Posiciona os navios do Jogador
 	public abstract void posicionarNavio();
 	//Ataca o oponente
