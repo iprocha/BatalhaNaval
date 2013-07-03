@@ -41,5 +41,9 @@ class NavioPequeno extends Navio {
 	public boolean isHorizontal() {
 		return isHorizontal;
 	}
+	
+	public boolean isDown() {
+		return isDown;
+	}
 
 }
