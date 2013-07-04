@@ -1,8 +1,5 @@
 package br.poo2013.projeto;
 
-import java.math.*;
-import java.util.Scanner;
-
 public class IAComputador {
 
 	// Gera um número aleatório entre 0-7
@@ -34,11 +31,16 @@ public class IAComputador {
 		return coordenadas;
 	}
 
-	public NavioPequeno posicionarNavioPequeno() {
+	public Navio posicionarNavio(int tipoNavio) {
 		boolean verifica_sentido;
 		Coordenada coordenadas = selecionarCoordenada();
 		verifica_sentido = colocarHorizontal();
-		return new NavioPequeno(coordenadas, verifica_sentido);
+		if(tipoNavio == 1)
+			return new NavioPequeno(coordenadas, verifica_sentido);
+		else if (tipoNavio == 2)
+			return new NavioMedio(coordenadas, verifica_sentido);
+		else
+			return new NavioGrande(coordenadas, verifica_sentido);
 	}
 
 }
